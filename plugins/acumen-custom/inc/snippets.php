@@ -410,3 +410,88 @@ function acumen_form_province_city_dropdown_script() {
     <?php
 }
 add_action( 'wp_footer', 'acumen_form_province_city_dropdown_script' );
+
+/**
+ * ============================================
+ * Service snippets
+ * ============================================
+ */
+
+/**
+ * Shortcode: [service_treatments columns="4" gap="24"]
+ * Renders the Treatment Options section on single Service pages.
+ */
+function acumen_service_treatments_shortcode( $atts ) {
+    if ( ! is_singular( 'service' ) ) {
+        return '';
+    }
+
+    $a = shortcode_atts(
+        [
+            'enable'  => 'treat_enable',
+            'heading' => 'treat_heading',
+            'intro'   => 'treat_intro',
+            'field'   => 'treat_items',
+            'columns' => '4',
+            'gap'     => '24',
+            'class'   => 'treatments-section',
+        ],
+        $atts
+    );
+
+    if ( ! get_field( $a['enable'] ) ) {
+        return '';
+    }
+
+    if ( ! have_rows( $a['field'] ) ) {
+        return '';
+    }
+
+    ob_start();
+    ?>
+    <section class="<?php echo esc_attr( $a['class'] ); ?>"
+             style="--t-cols:<?php echo (int) $a['columns']; ?>;--t-gap:<?php echo (int) $a['gap']; ?>px;">
+        <?php if ( $h = trim( (string) get_field( $a['heading'] ) ) ) : ?>
+            <h2 class="treat-heading"><?php echo esc_html( $h ); ?></h2>
+        <?php endif; ?>
+
+        <?php if ( $intro = get_field( $a['intro'] ) ) : ?>
+            <div class="treat-intro"><?php echo wp_kses_post( $intro ); ?></div>
+        <?php endif; ?>
+
+        <div class="treat-grid">
+            <?php
+            while ( have_rows( $a['field'] ) ) :
+                the_row();
+                $title = (string) get_sub_field( 't_title' );
+                $blurb = (string) get_sub_field( 't_blurb' );
+                $link  = get_sub_field( 't_link' ); // URL string or array.
+
+                $url = is_array( $link ) ? ( $link['url'] ?? '' ) : ( is_string( $link ) ? $link : '' );
+
+                if ( ! $title ) {
+                    continue;
+                }
+                ?>
+                <article class="treat-card">
+                    <?php if ( $url ) : ?>
+                        <a class="treat-link" href="<?php echo esc_url( $url ); ?>">
+                    <?php endif; ?>
+
+                        <h3 class="treat-title"><?php echo esc_html( $title ); ?></h3>
+                        <?php if ( $blurb ) : ?>
+                            <p class="treat-blurb"><?php echo esc_html( $blurb ); ?></p>
+                        <?php endif; ?>
+
+                    <?php if ( $url ) : ?>
+                        </a>
+                    <?php endif; ?>
+                </article>
+            <?php endwhile; ?>
+        </div>
+    </section>
+    <?php
+
+    return ob_get_clean();
+}
+add_shortcode( 'service_treatments', 'acumen_service_treatments_shortcode' );
