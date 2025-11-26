@@ -111,3 +111,49 @@ function acumen_team_expertise_shortcode( $atts ) {
     return ob_get_clean();
 }
 add_shortcode( 'team_expertise', 'acumen_team_expertise_shortcode' );
+
+/**
+ * Elementor Query: team_by_expertise
+ * Filters the Team Loop on a Service page to only show team members
+ * connected via the ACF relationship field "expertise_services".
+ */
+function acumen_elementor_query_team_by_expertise( $query ) {
+    if ( is_admin() ) {
+        return;
+    }
+
+    $service_id = get_queried_object_id();
+    if ( ! $service_id ) {
+        // not on a singular front-end request
+        $query->set( 'post__in', [ 0 ] );
+        return;
+    }
+
+    $ptype = get_post_type( $service_id );
+    // accept either 'service' or 'services' as the CPT slug
+    if ( ! in_array( $ptype, [ 'service', 'services' ], true ) ) {
+        $query->set( 'post__in', [ 0 ] );
+        return;
+    }
+
+    // ACF relationship field
+    $relationship_field = 'expertise_services';
+
+    // Force querying team posts
+    $query->set( 'post_type', 'team' );
+
+    // Only show team that reference THIS service in the relationship field
+    $meta_query = [
+        [
+            'key'     => $relationship_field,
+            'value'   => '"' . $service_id . '"', // ACF stores relationship as serialized array of IDs
+            'compare' => 'LIKE',
+        ],
+    ];
+
+    $query->set( 'meta_query', $meta_query );
+
+    // Show all, adjust if needed
+    $query->set( 'posts_per_page', -1 );
+}
+add_action( 'elementor/query/team_by_expertise', 'acumen_elementor_query_team_by_expertise' );
