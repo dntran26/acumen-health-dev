@@ -495,3 +495,34 @@ function acumen_service_treatments_shortcode( $atts ) {
     return ob_get_clean();
 }
 add_shortcode( 'service_treatments', 'acumen_service_treatments_shortcode' );
+
+/**
+ * ============================================
+ * Admin UI tweaks
+ * ============================================
+ */
+
+/**
+ * Hide the "Add New" UI for the Card Types taxonomy.
+ */
+function acumen_hide_add_new_card_type() {
+    ?>
+    <style>
+        /* Hide the "+ Add New Card Type" toggle */
+        #taxonomy-card-type .taxonomy-add-new {
+            display: none !important;
+        }
+
+        /* Hide the hidden input panel where new terms would be created */
+        #taxonomy-card-type .category-add {
+            display: none !important;
+        }
+
+        /* Hide the “Most Used” tab inside Card Types taxonomy */
+        #taxonomy-card-type .category-tabs li.hide-if-no-js {
+            display: none !important;
+        }
+    </style>
+    <?php
+}
+add_action( 'admin_head', 'acumen_hide_add_new_card_type' );
