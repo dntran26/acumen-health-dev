@@ -157,3 +157,38 @@ function acumen_elementor_query_team_by_expertise( $query ) {
     $query->set( 'posts_per_page', -1 );
 }
 add_action( 'elementor/query/team_by_expertise', 'acumen_elementor_query_team_by_expertise' );
+
+/**
+ * Use ACF Relationship field "featured_team_members" to control
+ * the Loop Grid with Query ID "service_featured_team"
+ * and keep the same order as selected in ACF.
+ */
+function acumen_service_featured_team_query( $query ) {
+
+    // Current page ID
+    $page_id = get_queried_object_id();
+    if ( ! $page_id ) {
+        return;
+    }
+
+    // Get Relationship field from this page
+    $featured = get_field( 'featured_team_members', $page_id );
+    if ( empty( $featured ) ) {
+        return;
+    }
+
+    // Convert to array of IDs
+    $post_ids = array_map(
+        function( $item ) {
+            return is_object( $item ) ? $item->ID : (int) $item;
+        },
+        $featured
+    );
+
+    // Override Elementor Loop Grid query
+    $query->set( 'post__in', $post_ids );
+    $query->set( 'orderby', 'post__in' );
+    $query->set( 'posts_per_page', count( $post_ids ) );
+}
+
+add_action( 'elementor/query/service_featured_team', 'acumen_service_featured_team_query' );
