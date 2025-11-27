@@ -15,6 +15,11 @@ function acumen_custom_bootstrap() {
 }
 add_action( 'init', 'acumen_custom_bootstrap' );
 
-// Load separate snippet file.
-require_once plugin_dir_path( __FILE__ ) . 'inc/snippets.php';
+require_once __DIR__ . '/inc/shortcodes.php';
+require_once __DIR__ . '/inc/elementor.php';
+require_once __DIR__ . '/inc/admin.php';
+require_once __DIR__ . '/inc/forms.php';
+// Temporary landing zone if needed in future.
+// require_once __DIR__ . '/inc/snippets.php';
+
 
