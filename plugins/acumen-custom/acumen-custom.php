@@ -15,12 +15,10 @@ function acumen_custom_bootstrap() {
 }
 add_action( 'init', 'acumen_custom_bootstrap' );
 
-require_once __DIR__ . '/inc/acf.php';
-require_once __DIR__ . '/inc/shortcodes.php';
-require_once __DIR__ . '/inc/elementor.php';
-require_once __DIR__ . '/inc/admin.php';
-require_once __DIR__ . '/inc/forms.php';
+require_once __DIR__ . '/inc/admin/admin.php';
+require_once __DIR__ . '/inc/forms/forms.php';
+require_once __DIR__ . '/inc/elementor/elementor.php';
+require_once __DIR__ . '/inc/shortcodes/shortcodes.php';
+require_once __DIR__ . '/inc/acf/acf.php';
 // Temporary landing zone if needed in future.
 // require_once __DIR__ . '/inc/snippets.php';
-
-
