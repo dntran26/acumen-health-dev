@@ -39,7 +39,13 @@ add_shortcode( 'team_firstname', 'acumen_team_firstname_shortcode' );
  * Shortcode: [team_expertise field="expertise_services" class="expertise-list" icon="URL"]
  * Outputs a list of expertise items from an ACF relationship field.
  */
+
 function acumen_team_expertise_shortcode( $atts ) {
+    // Ensure ACF is available.
+    if ( ! function_exists( 'get_field' ) ) {
+        return '';
+    }
+
     $a = shortcode_atts(
         [
             'field' => 'expertise_services', // ACF relationship field name
@@ -90,6 +96,11 @@ add_shortcode( 'team_expertise', 'acumen_team_expertise_shortcode' );
  * Renders the Treatment Options section on single Service pages.
  */
 function acumen_service_treatments_shortcode( $atts ) {
+    // Ensure ACF is available.
+    if ( ! function_exists( 'get_field' ) || ! function_exists( 'have_rows' ) ) {
+        return '';
+    }
+    
     if ( ! is_singular( 'service' ) ) {
         return '';
     }

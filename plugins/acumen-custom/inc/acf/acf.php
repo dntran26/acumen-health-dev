@@ -6,6 +6,11 @@
  * so they are tracked in Git with the rest of the code.
  */
 
+// Bail early if ACF is not available.
+if ( ! function_exists( 'acf_update_setting' ) && ! function_exists( 'get_field' ) ) {
+    return;
+}
+
 /**
  * Change the ACF JSON save path to the repo's /acf-json directory.
  *

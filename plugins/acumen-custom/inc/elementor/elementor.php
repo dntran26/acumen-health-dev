@@ -9,6 +9,11 @@
  * connected via the ACF relationship field "expertise_services".
  */
 function acumen_elementor_query_team_by_expertise( $query ) {
+    // Ensure ACF is available.
+    if ( ! function_exists( 'get_field' ) ) {
+        return;
+    }
+
     if ( is_admin() ) {
         return;
     }
@@ -54,6 +59,11 @@ add_action( 'elementor/query/team_by_expertise', 'acumen_elementor_query_team_by
  * and keep the same order as selected in ACF.
  */
 function acumen_service_featured_team_query( $query ) {
+
+    // Ensure ACF is available.
+    if ( ! function_exists( 'get_field' ) ) {
+        return;
+    }
 
     // Current page ID
     $page_id = get_queried_object_id();
