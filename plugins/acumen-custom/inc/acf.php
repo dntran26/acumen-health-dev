@@ -1,0 +1,36 @@
+<?php
+/**
+ * ACF JSON settings for Acumen Custom plugin.
+ *
+ * Save and load field groups from the project level /acf-json directory
+ * so they are tracked in Git with the rest of the code.
+ */
+
+/**
+ * Change the ACF JSON save path to the repo's /acf-json directory.
+ *
+ * @param string $path Default save path.
+ * @return string
+ */
+function acumen_acf_json_save_point( $path ) {
+    // __DIR__ is .../plugins/acumen-custom/inc
+    // Go up three levels to get to the repo root: .../acumen-health.
+    $root = dirname( dirname( dirname( __DIR__ ) ) );
+
+    return $root . '/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'acumen_acf_json_save_point' );
+
+/**
+ * Add the repo's /acf-json directory to the ACF JSON load paths.
+ *
+ * @param array $paths Default load paths.
+ * @return array
+ */
+function acumen_acf_json_load_points( $paths ) {
+    $root = dirname( dirname( dirname( __DIR__ ) ) );
+    $paths[] = $root . '/acf-json';
+
+    return $paths;
+}
+add_filter( 'acf/settings/load_json', 'acumen_acf_json_load_points' );

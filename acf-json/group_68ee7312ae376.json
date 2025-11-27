@@ -1,0 +1,47 @@
+{
+    "key": "group_68ee7312ae376",
+    "title": "FAQs",
+    "fields": [
+        {
+            "key": "field_68ee7312bff7f",
+            "label": "Answer1",
+            "name": "faq_answer",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Add the full answer to this FAQ below. You can include headings, links, or bullet points for clarity.\r\n\r\nTip: The “Question” goes in the Title field at the top.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "faqs"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1764225620
+}

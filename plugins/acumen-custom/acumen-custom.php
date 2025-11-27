@@ -15,6 +15,7 @@ function acumen_custom_bootstrap() {
 }
 add_action( 'init', 'acumen_custom_bootstrap' );
 
+require_once __DIR__ . '/inc/acf.php';
 require_once __DIR__ . '/inc/shortcodes.php';
 require_once __DIR__ . '/inc/elementor.php';
 require_once __DIR__ . '/inc/admin.php';
