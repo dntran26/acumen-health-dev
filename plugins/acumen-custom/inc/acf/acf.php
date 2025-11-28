@@ -1,10 +1,17 @@
 <?php
 /**
- * ACF JSON settings for Acumen Custom plugin.
+ * ACF Module
  *
- * Save and load field groups from the project level /acf-json directory
- * so they are tracked in Git with the rest of the code.
+ * Handles Advanced Custom Fields integration:
+ * - JSON save / load paths.
+ * - Any future ACF helper functions.
+ *
+ * @package AcumenCustom
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 // Bail early if ACF is not available.
 if ( ! function_exists( 'acf_update_setting' ) && ! function_exists( 'get_field' ) ) {

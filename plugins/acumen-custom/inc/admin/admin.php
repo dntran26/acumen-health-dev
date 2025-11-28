@@ -1,7 +1,18 @@
 <?php
 /**
- * Admin UI tweaks for Acumen Custom plugin.
+ * Admin Module
+ *
+ * Handles all wp-admin customizations for Acumen:
+ * - Custom columns for Team post type (thumbnail, order).
+ * - Hiding "Add New" for specific taxonomies (e.g. Card Types).
+ * - Featured Image instructional note on Service admin screens.
+ *
+ * @package AcumenCustom
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Admin – Team Thumbnail Column (60x60) in Team list table.

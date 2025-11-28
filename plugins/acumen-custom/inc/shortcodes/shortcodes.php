@@ -1,7 +1,18 @@
 <?php
 /**
- * Shortcodes for Acumen Custom plugin.
+ * Shortcodes Module
+ *
+ * Registers all custom shortcodes used on the Acumen site:
+ * - [team_firstname]
+ * - [team_expertise]
+ * - [service_treatments]
+ *
+ * @package AcumenCustom
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Shortcode: [team_firstname]

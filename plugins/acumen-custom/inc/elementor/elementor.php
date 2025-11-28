@@ -1,7 +1,17 @@
 <?php
 /**
- * Elementor query integrations for Acumen Custom plugin.
+ * Elementor Module
+ *
+ * Registers and handles all custom Elementor query filters and helpers:
+ * - team_by_expertise: show team members linked via ACF relationship.
+ * - service_featured_team: featured team query with preserved order.
+ *
+ * @package AcumenCustom
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Elementor Query: team_by_expertise

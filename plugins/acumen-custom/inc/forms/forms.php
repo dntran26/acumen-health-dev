@@ -1,7 +1,17 @@
 <?php
 /**
- * Form helpers for Acumen Custom plugin.
+ * Forms Module
+ *
+ * Handles form-related customizations:
+ * - Gravity Forms Province → City dynamic dropdown JS.
+ * - Any future form validation or preprocessing.
+ *
+ * @package AcumenCustom
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Output JS to handle province to city dropdown options on the contact page.
